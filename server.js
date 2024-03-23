@@ -1,14 +1,20 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const {router} = require("./src/routes/weatherDataRoute");
+const { router } = require("./src/routes/weatherDataRoute");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-
-
-app.use('/api/v1/weather/',router);
+app.use(cors());
 
 require("dotenv").config();
+
+//swagger
+const swaggerDoc = require("./swagger-docs/info");
+const swaggerUi = require("swagger-ui-express");
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use("/api/v1/", router);
 
 // Connect to MongoDB
 mongoose

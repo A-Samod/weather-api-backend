@@ -1,5 +1,15 @@
 const WeatherData = require("../models/weatherData");
 
+async function healthCheckData() {
+  try {
+    const msg = "Health Check Status : Success";
+    return msg;
+  } catch (error) {
+    const msg = "Health Check Status : Failed";
+    return msg;
+  }
+}
+
 async function fetchWeatherData(district) {
   try {
     let query = {};
@@ -18,4 +28,5 @@ async function fetchWeatherData(district) {
 
 module.exports = {
   fetchWeatherData,
+  healthCheckData,
 };
