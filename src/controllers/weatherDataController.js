@@ -3,6 +3,7 @@ const {
   healthCheckData,
 } = require("../services/weatherDataService");
 
+//Healthcheck Function
 async function healthCheck(req, res) {
   try {
     const msg = await healthCheckData();
@@ -20,6 +21,8 @@ async function healthCheck(req, res) {
     });
   }
 }
+
+//Fetch weather data from DB
 async function getWeatherData(req, res) {
   try {
     const district = req.query.district;
