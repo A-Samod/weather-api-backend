@@ -1,5 +1,9 @@
 const WeatherData = require("../models/weatherData");
 
+/**
+ * 
+ * @returns 
+ */
 async function healthCheckData() {
   try {
     const msg = "Health Check Status : Success";
@@ -10,6 +14,11 @@ async function healthCheckData() {
   }
 }
 
+/**
+ * 
+ * @param {*} district 
+ * @returns 
+ */
 async function fetchWeatherData(district) {
   try {
     let query = {};
