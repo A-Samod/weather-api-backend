@@ -20,6 +20,7 @@ const swaggerDoc = {
   paths: {
     "/healthCheck": healthCheck,
     "/weather/details": weatherData,
+    "/weather/history/details": weatherData,
   },
   components: {
     securitySchemes: {

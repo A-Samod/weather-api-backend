@@ -1,6 +1,7 @@
 const {
   fetchWeatherData,
   healthCheckData,
+  fetchWeatherDataHistory
 } = require("../services/weatherDataService");
 
 //Healthcheck Function
@@ -41,7 +42,27 @@ async function getWeatherData(req, res) {
   }
 }
 
+//Fetch weather data history from DB
+async function getWeatherDataHistory(req, res) {
+  try {
+    const district = req.query.district;
+    const weatherData = await fetchWeatherDataHistory(district);
+    res.status(200).json({
+      status: 200,
+      data: weatherData,
+      message: "Weather data history fetched successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      error: error.message,
+      message: "Error fetching weather data",
+    });
+  }
+}
+
 module.exports = {
+  getWeatherDataHistory,
   getWeatherData,
   healthCheck,
 };

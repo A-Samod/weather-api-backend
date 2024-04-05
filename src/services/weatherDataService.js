@@ -1,4 +1,5 @@
 const WeatherData = require("../models/weatherData");
+const LogData = require("../models/log");
 
 /**
  * 
@@ -23,7 +24,7 @@ async function fetchWeatherData(district) {
   try {
     let query = {};
     if (district) {
-      query = { location: district };
+      query = { district: district };
     }
     console.log("location ====>>>", district);
     const weatherData = await WeatherData.find(query);
@@ -35,7 +36,25 @@ async function fetchWeatherData(district) {
   }
 }
 
+async function fetchWeatherDataHistory(district) {
+  try {
+    let query = {};
+    if (district) {
+      query = { "data.location": district };
+    }
+    console.log("location ====>>>", district);
+    // const weatherData = await LogData.find(query);
+    const weatherData = await LogData.find(query).sort({"timestamp": -1});
+    console.log("weather-data ===>>> ", weatherData);
+
+    return weatherData;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
+  fetchWeatherDataHistory,
   fetchWeatherData,
   healthCheckData,
 };
