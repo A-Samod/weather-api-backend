@@ -68,7 +68,38 @@ const weatherData = {
   },
 };
 
+//swagger for weather data
+const weatherHistoryData = {
+  get: {
+    summary: "weatherDataHistory",
+    description: "weatherData API",
+    tags: ["Weather API"],
+    parameters: [
+      {
+        name: "district",
+        in: "query",
+        required: false,
+      },
+    ],
+    responses: {
+      200: {
+        description: "Success",
+      },
+      400: {
+        description: "Bad Request",
+      },
+      401: {
+        description: "Unauthorized",
+      },
+      500: {
+        description: "Internal Server Error",
+      },
+    },
+  },
+};
+
 module.exports = {
+  weatherHistoryData,
   healthCheck,
   weatherData,
 };
