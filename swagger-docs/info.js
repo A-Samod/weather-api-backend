@@ -21,6 +21,7 @@ const swaggerDoc = {
     "/healthCheck": healthCheck,
     "/weather/details": weatherData,
     "/weather/history/details": weatherData,
+    "/weather/history/details": pipeline,
   },
   components: {
     securitySchemes: {
