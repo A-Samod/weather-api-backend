@@ -1,4 +1,4 @@
-const { healthCheck, weatherData } = require("./path");
+const { healthCheck, weatherData, weatherHistoryData, findMaxTemperature , findMinTemperature, findMinMAxTemp} = require("./path");
 
 const swaggerDoc = {
   openapi: "3.0.0",
@@ -20,7 +20,10 @@ const swaggerDoc = {
   paths: {
     "/healthCheck": healthCheck,
     "/weather/details": weatherData,
-    "/weather/history/details": weatherData,
+    "/weather/history/details": weatherHistoryData,
+    "/weather/max-temp": findMaxTemperature,
+    "/weather/min-temp": findMinTemperature,
+    "/weather/min-max-temp": findMinMAxTemp,
   },
   components: {
     securitySchemes: {

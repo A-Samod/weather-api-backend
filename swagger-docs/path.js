@@ -98,7 +98,80 @@ const weatherHistoryData = {
   },
 };
 
+//swagger for max temperature
+const findMaxTemperature = {
+  get: {
+    summary: "findMaxTemperature",
+    description: "weatherData API",
+    tags: ["Weather API"],
+    responses: {
+      200: {
+        description: "Success",
+      },
+      400: {
+        description: "Bad Request",
+      },
+      401: {
+        description: "Unauthorized",
+      },
+      500: {
+        description: "Internal Server Error",
+      },
+    },
+  },
+};
+
+//swagger for min temperature
+const findMinTemperature = {
+  get: {
+    summary: "findMinTemperature",
+    description: "weatherData API",
+    tags: ["Weather API"],
+    responses: {
+      200: {
+        description: "Success",
+      },
+      400: {
+        description: "Bad Request",
+      },
+      401: {
+        description: "Unauthorized",
+      },
+      500: {
+        description: "Internal Server Error",
+      },
+    },
+  },
+};
+
+//swagger for min temperature
+const findMinMAxTemp = {
+  get: {
+    summary: "findMinMaxTemperature",
+    description: "weatherData API",
+    tags: ["Weather API"],
+    responses: {
+      200: {
+        description: "Success",
+      },
+      400: {
+        description: "Bad Request",
+      },
+      401: {
+        description: "Unauthorized",
+      },
+      500: {
+        description: "Internal Server Error",
+      },
+    },
+  },
+};
+
+
 module.exports = {
+  findMinMAxTemp,
+  findMinTemperature,
+  findMaxTemperature,
   weatherHistoryData,
   healthCheck,
   weatherData,

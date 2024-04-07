@@ -53,7 +53,89 @@ async function fetchWeatherDataHistory(district) {
   }
 }
 
+async function findMaxTemperature() {
+  try {
+    const weatherData = await WeatherData.find({}).sort({ "temperature": -1 }).limit(25);
+    
+    let maxTemperature = -Infinity;
+    let districtWithMaxTemperature = "";
+
+    weatherData.forEach((data) => {
+      const temperature = data.temperature;
+      const district = data.district;
+      
+      if (temperature > maxTemperature) {
+        maxTemperature = temperature;
+        districtWithMaxTemperature = district;
+      }
+    });
+
+    return { maxTemperature, districtWithMaxTemperature };
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function findMinTemperature() {
+  try {
+    const weatherData = await WeatherData.find({}).sort({ "temperature": 1 }).limit(25);
+    
+    let minTemperature = Infinity;
+    let districtWithMinTemperature = "";
+
+    weatherData.forEach((data) => {
+      const temperature = data.temperature;
+      const district = data.district;
+      
+      if (temperature < minTemperature) {
+        minTemperature = temperature;
+        districtWithMinTemperature = district;
+      }
+    });
+    return { minTemperature, districtWithMinTemperature };
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function findMinMaxTemperature() {
+  try {
+    const twentyFourHoursAgo = new Date();
+    twentyFourHoursAgo.setDate(twentyFourHoursAgo.getDate() - 1);
+    const result = await LogData.aggregate([
+      {
+        $match: {
+          updatedAt: { $gte: twentyFourHoursAgo }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          minTemperature: { $min: "$temperature" },
+          maxTemperature: { $max: "$temperature" }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          minTemperature: 1,
+          maxTemperature: 1
+        }
+      }
+    ]);
+
+    console.log("result >>>", result)
+    return result[0]; 
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 module.exports = {
+  findMinMaxTemperature,
+  findMinTemperature,
+  findMaxTemperature,
   fetchWeatherDataHistory,
   fetchWeatherData,
   healthCheckData,
