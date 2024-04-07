@@ -1,7 +1,10 @@
 const {
   fetchWeatherData,
   healthCheckData,
-  fetchWeatherDataHistory
+  fetchWeatherDataHistory,
+  findMaxTemperature,
+  findMinTemperature,
+  findMinMaxTemperature
 } = require("../services/weatherDataService");
 
 //Healthcheck Function
@@ -61,7 +64,64 @@ async function getWeatherDataHistory(req, res) {
   }
 }
 
+//find max temperature
+async function findMaxTemp(req, res) {
+  try {
+    const tempData = await findMaxTemperature();
+    res.status(200).json({
+      status: 200,
+      data: tempData,
+      message: "Max temperature fetched successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      error: error.message,
+      message: "Error fetching weather data",
+    });
+  }
+}
+
+//find min temperature
+async function findMinTemp(req, res) {
+  try {
+    const tempData = await findMinTemperature();
+    res.status(200).json({
+      status: 200,
+      data: tempData,
+      message: "Min temperature fetched successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      error: error.message,
+      message: "Error fetching weather data",
+    });
+  }
+}
+
+//find min temperature
+async function findMinMAxTemp(req, res) {
+  try {
+    const tempData = await findMinMaxTemperature();
+    res.status(200).json({
+      status: 200,
+      data: tempData,
+      message: "Min temperature fetched successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      error: error.message,
+      message: "Error fetching weather data",
+    });
+  }
+}
+
 module.exports = {
+  findMinMAxTemp,
+  findMinTemp,
+  findMaxTemp,
   getWeatherDataHistory,
   getWeatherData,
   healthCheck,
